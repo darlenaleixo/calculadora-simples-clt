@@ -8,14 +8,22 @@ function App() {
   const [anos, setAnos] = useState(2);
   const [feriasVencidas, setFeriasVencidas] = useState(true);
   const [fgtsTotal, setFgtsTotal] = useState(10000);
+  const [tipoRescisao, setTipoRescisao] = useState('semJustaCausa');
   const [dark, setDark] = useState(false);
 
   const feriasProp = (salario / 12) * meses;
   const umTercoFerias = feriasProp / 3;
   const decimoTerceiro = (salario / 12) * meses;
   const saldoSalario = (salario / 30) * dias;
-  const avisoPrevio = salario + ((3 * anos) * (salario / 30));
-  const multaFgts = fgtsTotal * 0.4;
+  const avisoPrevio =
+  tipoRescisao === 'semJustaCausa' ? salario + ((3 * anos) * (salario / 30)) :
+  tipoRescisao === 'fimContrato' ? salario :
+  0;
+  const multaFgts =
+  tipoRescisao === 'semJustaCausa' ? fgtsTotal * 0.4 :
+  tipoRescisao === 'fimContrato' ? fgtsTotal * 0.2 :
+  0;
+
   const feriasVenc = feriasVencidas ? salario : 0;
   const umTercoVenc = feriasVencidas ? salario / 3 : 0;
 
@@ -66,6 +74,18 @@ function App() {
             <input type="number" value={anos} onChange={e => setAnos(+e.target.value)} className="w-full p-2 rounded border" />
           </label>
           <label>Férias vencidas?
+          <label>Tipo de rescisão
+  <select
+    value={tipoRescisao}
+    onChange={e => setTipoRescisao(e.target.value)}
+    className="w-full p-2 rounded border"
+  >
+    <option value="semJustaCausa">Demissão sem justa causa</option>
+    <option value="pedidoDemissao">Pedido de demissão</option>
+    <option value="justaCausa">Demissão por justa causa</option>
+    <option value="fimContrato">Término de contrato</option>
+  </select>
+</label>
             <select value={feriasVencidas ? '1' : '0'} onChange={e => setFeriasVencidas(e.target.value === '1')} className="w-full p-2 rounded border">
               <option value="1">Sim</option>
               <option value="0">Não</option>
