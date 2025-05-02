@@ -63,22 +63,102 @@ function App() {
         </div>
 
         <div className="grid gap-4 border rounded-lg p-4 shadow bg-white dark:bg-gray-800">
-        <label className="flex items-center gap-2">
-  <DollarSign className="w-4 h-4" />
-  Salário (R$)
-            <input type="number" value={salario} onChange={e => setSalario(+e.target.value)} className="w-full p-2 rounded border" />
-          </label>
-          <label>Dias trabalhados no mês
-            <input type="number" value={dias} onChange={e => setDias(+e.target.value)} className="w-full p-2 rounded border" />
-          </label>
-          <label>Meses trabalhados no ano
-            <input type="number" value={meses} onChange={e => setMeses(+e.target.value)} className="w-full p-2 rounded border" />
-          </label>
-          <label>Anos trabalhados
-            <input type="number" value={anos} onChange={e => setAnos(+e.target.value)} className="w-full p-2 rounded border" />
-          </label>
+        <label className="flex flex-col gap-1">
+  <span className="flex items-center gap-2 font-medium">
+    <DollarSign className="w-4 h-4" />
+    Salário (R$)
+  </span>
+  <input
+    type="number"
+    value={salario}
+    onChange={e => setSalario(+e.target.value)}
+    className="w-full p-2 rounded border"
+  />
+</label>
+
+jsx
+Copiar
+Editar
+<label className="flex flex-col gap-1">
+  <span className="flex items-center gap-2 font-medium">
+    <Clock className="w-4 h-4" />
+    Dias trabalhados no mês
+  </span>
+  <input
+    type="number"
+    value={dias}
+    onChange={e => setDias(+e.target.value)}
+    className="w-full p-2 rounded border"
+  />
+</label>
+
+jsx
+Copiar
+Editar
+<label className="flex flex-col gap-1">
+  <span className="flex items-center gap-2 font-medium">
+    <CalendarDays className="w-4 h-4" />
+    Meses trabalhados no ano
+  </span>
+  <input
+    type="number"
+    value={meses}
+    onChange={e => setMeses(+e.target.value)}
+    className="w-full p-2 rounded border"
+  />
+</label>
+
+jsx
+Copiar
+Editar
+<label className="flex flex-col gap-1">
+  <span className="flex items-center gap-2 font-medium">
+    <BadgeInfo className="w-4 h-4" />
+    Anos trabalhados
+  </span>
+  <input
+    type="number"
+    value={anos}
+    onChange={e => setAnos(+e.target.value)}
+    className="w-full p-2 rounded border"
+  />
+</label>
+
+jsx
+Copiar
+Editar
+<label className="flex flex-col gap-1">
+  <span className="flex items-center gap-2 font-medium">
+    <Briefcase className="w-4 h-4" />
+    Tipo de rescisão
+  </span>
+  <select
+    value={tipoRescisao}
+    onChange={e => setTipoRescisao(e.target.value)}
+    className="w-full p-2 rounded border"
+  >
+    <option value="semJustaCausa">Demissão sem justa causa</option>
+    <option value="pedidoDemissao">Pedido de demissão</option>
+    <option value="justaCausa">Demissão por justa causa</option>
+    <option value="fimContrato">Término de contrato</option>
+  </select>
+</label>
           <label>Férias vencidas?
-          <label>Tipo de rescisão
+          <label className="flex flex-col gap-1">
+  <span className="flex items-center gap-2 font-medium">
+    <Briefcase className="w-4 h-4" />
+    Tipo de rescisão
+  </span>
+  <select
+    value={tipoRescisao}
+    onChange={e => setTipoRescisao(e.target.value)}
+    className="w-full p-2 rounded border"
+  >
+    <option value="semJustaCausa">Demissão sem justa causa</option>
+    <option value="pedidoDemissao">Pedido de demissão</option>
+    <option value="justaCausa">Demissão por justa causa</option>
+    <option value="fimContrato">Término de contrato</option>
+      </select>
   <select
     value={tipoRescisao}
     onChange={e => setTipoRescisao(e.target.value)}
