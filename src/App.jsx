@@ -66,7 +66,8 @@ function App() {
         <label className="flex items-center gap-2">
   <DollarSign className="w-4 h-4" />
   Salário (R$)
-</label>
+            <input type="number" value={salario} onChange={e => setSalario(+e.target.value)} className="w-full p-2 rounded border" />
+          </label>
           <label>Dias trabalhados no mês
             <input type="number" value={dias} onChange={e => setDias(+e.target.value)} className="w-full p-2 rounded border" />
           </label>
