@@ -32,7 +32,9 @@ function App() {
 
   const exportPDF = () => {
     const element = document.getElementById('resultado');
-    html2pdf().from(element).save('rescisao-clt.pdf');
+    if (element) {
+      html2pdf().from(element).save('rescisao-clt.pdf');
+    }
   };
 
   const toggleTheme = () => {
@@ -44,7 +46,7 @@ function App() {
   }, [salario]);
 
   return (
-    <div className={\`\${dark ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'} min-h-screen p-6\`}>
+    <div className={`${dark ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'} min-h-screen p-6`}>
       <div className="max-w-3xl mx-auto space-y-6">
         <div className="flex justify-between items-center">
           <h1 className="text-2xl font-bold">Calculadora Simples CLT</h1>
