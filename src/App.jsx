@@ -1,12 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Card, CardContent } from '@/components/ui/card';
-import { Label } from '@/components/ui/label';
-import { Download, Sun, Moon } from 'lucide-react';
 import html2pdf from 'html2pdf.js';
-import { useTheme } from './theme';
 
 function App() {
   const [salario, setSalario] = useState(3000);
@@ -15,7 +9,7 @@ function App() {
   const [anos, setAnos] = useState(2);
   const [feriasVencidas, setFeriasVencidas] = useState(true);
   const [fgtsTotal, setFgtsTotal] = useState(10000);
-  const { theme, setTheme } = useTheme();
+  const [dark, setDark] = useState(false);
 
   const feriasProp = (salario / 12) * meses;
   const umTercoFerias = feriasProp / 3;
@@ -42,7 +36,7 @@ function App() {
   };
 
   const toggleTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark');
+    setDark(!dark);
   };
 
   useEffect(() => {
@@ -50,52 +44,40 @@ function App() {
   }, [salario]);
 
   return (
-    <div className="max-w-3xl mx-auto p-6 space-y-6">
-      <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold">Calculadora Simples CLT</h1>
-        <Button variant="ghost" onClick={toggleTheme}>
-          {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-        </Button>
-      </div>
+    <div className={\`\${dark ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'} min-h-screen p-6\`}>
+      <div className="max-w-3xl mx-auto space-y-6">
+        <div className="flex justify-between items-center">
+          <h1 className="text-2xl font-bold">Calculadora Simples CLT</h1>
+          <button onClick={toggleTheme} className="px-3 py-1 rounded bg-gray-200 dark:bg-gray-700">
+            {dark ? '☀️ Claro' : '🌙 Escuro'}
+          </button>
+        </div>
 
-      <Card>
-        <CardContent className="grid gap-4 p-4">
-          <div>
-            <Label>Salário (R$)</Label>
-            <Input type="number" value={salario} onChange={e => setSalario(+e.target.value)} />
-          </div>
-          <div>
-            <Label>Dias trabalhados no mês</Label>
-            <Input type="number" value={dias} onChange={e => setDias(+e.target.value)} />
-          </div>
-          <div>
-            <Label>Meses trabalhados no ano</Label>
-            <Input type="number" value={meses} onChange={e => setMeses(+e.target.value)} />
-          </div>
-          <div>
-            <Label>Anos trabalhados</Label>
-            <Input type="number" value={anos} onChange={e => setAnos(+e.target.value)} />
-          </div>
-          <div>
-            <Label>Férias vencidas?</Label>
-            <select
-              value={feriasVencidas ? '1' : '0'}
-              onChange={e => setFeriasVencidas(e.target.value === '1')}
-              className="border rounded-md p-2"
-            >
+        <div className="grid gap-4 border rounded-lg p-4 shadow bg-white dark:bg-gray-800">
+          <label>Salário (R$)
+            <input type="number" value={salario} onChange={e => setSalario(+e.target.value)} className="w-full p-2 rounded border" />
+          </label>
+          <label>Dias trabalhados no mês
+            <input type="number" value={dias} onChange={e => setDias(+e.target.value)} className="w-full p-2 rounded border" />
+          </label>
+          <label>Meses trabalhados no ano
+            <input type="number" value={meses} onChange={e => setMeses(+e.target.value)} className="w-full p-2 rounded border" />
+          </label>
+          <label>Anos trabalhados
+            <input type="number" value={anos} onChange={e => setAnos(+e.target.value)} className="w-full p-2 rounded border" />
+          </label>
+          <label>Férias vencidas?
+            <select value={feriasVencidas ? '1' : '0'} onChange={e => setFeriasVencidas(e.target.value === '1')} className="w-full p-2 rounded border">
               <option value="1">Sim</option>
               <option value="0">Não</option>
             </select>
-          </div>
-          <div>
-            <Label>Total depositado no FGTS (R$)</Label>
-            <Input type="number" value={fgtsTotal} onChange={e => setFgtsTotal(+e.target.value)} />
-          </div>
-        </CardContent>
-      </Card>
+          </label>
+          <label>Total FGTS depositado (R$)
+            <input type="number" value={fgtsTotal} onChange={e => setFgtsTotal(+e.target.value)} className="w-full p-2 rounded border" />
+          </label>
+        </div>
 
-      <Card id="resultado">
-        <CardContent className="p-4 space-y-2">
+        <div id="resultado" className="bg-white dark:bg-gray-800 rounded-lg shadow p-4 space-y-2">
           <h2 className="text-xl font-semibold">Resultado</h2>
           <p>Saldo de salário: R$ {saldoSalario.toFixed(2)}</p>
           <p>Aviso prévio: R$ {avisoPrevio.toFixed(2)}</p>
@@ -107,13 +89,13 @@ function App() {
           <p>Multa 40% FGTS: R$ {multaFgts.toFixed(2)}</p>
           <hr />
           <p className="font-bold text-lg">Total: R$ {total.toFixed(2)}</p>
-        </CardContent>
-      </Card>
+        </div>
 
-      <div className="text-right">
-        <Button onClick={exportPDF} className="gap-2">
-          <Download className="w-4 h-4" /> Exportar PDF
-        </Button>
+        <div className="text-right">
+          <button onClick={exportPDF} className="px-4 py-2 mt-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+            Exportar PDF
+          </button>
+        </div>
       </div>
     </div>
   );
