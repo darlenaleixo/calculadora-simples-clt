@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -7,7 +8,7 @@ import { Download, Sun, Moon } from 'lucide-react';
 import html2pdf from 'html2pdf.js';
 import { useTheme } from './theme';
 
-export default function App() {
+function App() {
   const [salario, setSalario] = useState(3000);
   const [dias, setDias] = useState(15);
   const [meses, setMeses] = useState(6);
@@ -117,3 +118,5 @@ export default function App() {
     </div>
   );
 }
+
+export default App;
