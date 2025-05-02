@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import html2pdf from 'html2pdf.js';
 
@@ -32,9 +31,7 @@ function App() {
 
   const exportPDF = () => {
     const element = document.getElementById('resultado');
-    if (element) {
-      html2pdf().from(element).save('rescisao-clt.pdf');
-    }
+    if (element) html2pdf().from(element).save('rescisao-clt.pdf');
   };
 
   const toggleTheme = () => {
