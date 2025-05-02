@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import html2pdf from 'html2pdf.js';
+import { Briefcase, CalendarDays, Clock, BadgeInfo, DollarSign, Download, Sun, Moon } from 'lucide-react';
+
 
 function App() {
   const [salario, setSalario] = useState(3000);
@@ -61,9 +63,10 @@ function App() {
         </div>
 
         <div className="grid gap-4 border rounded-lg p-4 shadow bg-white dark:bg-gray-800">
-          <label>Salário (R$)
-            <input type="number" value={salario} onChange={e => setSalario(+e.target.value)} className="w-full p-2 rounded border" />
-          </label>
+        <label className="flex items-center gap-2">
+  <DollarSign className="w-4 h-4" />
+  Salário (R$)
+</label>
           <label>Dias trabalhados no mês
             <input type="number" value={dias} onChange={e => setDias(+e.target.value)} className="w-full p-2 rounded border" />
           </label>
