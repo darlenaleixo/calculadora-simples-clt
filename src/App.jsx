@@ -1,7 +1,16 @@
 import { useState, useEffect } from 'react';
 import html2pdf from 'html2pdf.js';
-import { Briefcase, CalendarDays, Clock, BadgeInfo, DollarSign, Download, Sun, Moon } from 'lucide-react';
-
+import {
+  Briefcase,
+  CalendarDays,
+  Clock,
+  BadgeInfo,
+  DollarSign,
+  Download,
+  Sun,
+  Moon,
+  CheckCircle
+} from 'lucide-react';
 
 function App() {
   const [salario, setSalario] = useState(3000);
@@ -18,26 +27,17 @@ function App() {
   const decimoTerceiro = (salario / 12) * meses;
   const saldoSalario = (salario / 30) * dias;
   const avisoPrevio =
-  tipoRescisao === 'semJustaCausa' ? salario + ((3 * anos) * (salario / 30)) :
-  tipoRescisao === 'fimContrato' ? salario :
-  0;
+    tipoRescisao === 'semJustaCausa' ? salario + ((3 * anos) * (salario / 30)) :
+    tipoRescisao === 'fimContrato' ? salario : 0;
   const multaFgts =
-  tipoRescisao === 'semJustaCausa' ? fgtsTotal * 0.4 :
-  tipoRescisao === 'fimContrato' ? fgtsTotal * 0.2 :
-  0;
+    tipoRescisao === 'semJustaCausa' ? fgtsTotal * 0.4 :
+    tipoRescisao === 'fimContrato' ? fgtsTotal * 0.2 : 0;
 
   const feriasVenc = feriasVencidas ? salario : 0;
   const umTercoVenc = feriasVencidas ? salario / 3 : 0;
 
-  const total =
-    saldoSalario +
-    avisoPrevio +
-    feriasProp +
-    umTercoFerias +
-    decimoTerceiro +
-    multaFgts +
-    feriasVenc +
-    umTercoVenc;
+  const total = saldoSalario + avisoPrevio + feriasProp + umTercoFerias +
+    decimoTerceiro + multaFgts + feriasVenc + umTercoVenc;
 
   const exportPDF = () => {
     const element = document.getElementById('resultado');
@@ -63,95 +63,101 @@ function App() {
         </div>
 
         <div className="grid gap-4 border rounded-lg p-4 shadow bg-white dark:bg-gray-800">
-        <label className="flex flex-col gap-1">
-  <span className="flex items-center gap-2 font-medium">
-    <DollarSign className="w-4 h-4" />
-    Salário (R$)
-  </span>
-  <input
-    type="number"
-    value={salario}
-    onChange={e => setSalario(+e.target.value)}
-    className="w-full p-2 rounded border"
-  />
-</label>
-
-
-<label className="flex flex-col gap-1">
-  <span className="flex items-center gap-2 font-medium">
-    <Clock className="w-4 h-4" />
-    Dias trabalhados no mês
-  </span>
-  <input
-    type="number"
-    value={dias}
-    onChange={e => setDias(+e.target.value)}
-    className="w-full p-2 rounded border"
-  />
-</label>
-
-
-<label className="flex flex-col gap-1">
-  <span className="flex items-center gap-2 font-medium">
-    <CalendarDays className="w-4 h-4" />
-    Meses trabalhados no ano
-  </span>
-  <input
-    type="number"
-    value={meses}
-    onChange={e => setMeses(+e.target.value)}
-    className="w-full p-2 rounded border"
-  />
-</label>
-
-<label className="flex flex-col gap-1">
-  <span className="flex items-center gap-2 font-medium">
-    <BadgeInfo className="w-4 h-4" />
-    Anos trabalhados
-  </span>
-  <input
-    type="number"
-    value={anos}
-    onChange={e => setAnos(+e.target.value)}
-    className="w-full p-2 rounded border"
-  />
-</label>
-
-
-          <label>Férias vencidas?
           <label className="flex flex-col gap-1">
-  <span className="flex items-center gap-2 font-medium">
-    <Briefcase className="w-4 h-4" />
-    Tipo de rescisão
-  </span>
-  <select
-    value={tipoRescisao}
-    onChange={e => setTipoRescisao(e.target.value)}
-    className="w-full p-2 rounded border"
-  >
-    <option value="semJustaCausa">Demissão sem justa causa</option>
-    <option value="pedidoDemissao">Pedido de demissão</option>
-    <option value="justaCausa">Demissão por justa causa</option>
-    <option value="fimContrato">Término de contrato</option>
-      </select>
-  <select
-    value={tipoRescisao}
-    onChange={e => setTipoRescisao(e.target.value)}
-    className="w-full p-2 rounded border"
-  >
-    <option value="semJustaCausa">Demissão sem justa causa</option>
-    <option value="pedidoDemissao">Pedido de demissão</option>
-    <option value="justaCausa">Demissão por justa causa</option>
-    <option value="fimContrato">Término de contrato</option>
-  </select>
-</label>
-            <select value={feriasVencidas ? '1' : '0'} onChange={e => setFeriasVencidas(e.target.value === '1')} className="w-full p-2 rounded border">
+            <span className="flex items-center gap-2 font-medium">
+              <DollarSign className="w-4 h-4" />
+              Salário (R$)
+            </span>
+            <input
+              type="number"
+              value={salario}
+              onChange={e => setSalario(+e.target.value)}
+              className="w-full p-2 rounded border"
+            />
+          </label>
+
+          <label className="flex flex-col gap-1">
+            <span className="flex items-center gap-2 font-medium">
+              <Clock className="w-4 h-4" />
+              Dias trabalhados no mês
+            </span>
+            <input
+              type="number"
+              value={dias}
+              onChange={e => setDias(+e.target.value)}
+              className="w-full p-2 rounded border"
+            />
+          </label>
+
+          <label className="flex flex-col gap-1">
+            <span className="flex items-center gap-2 font-medium">
+              <CalendarDays className="w-4 h-4" />
+              Meses trabalhados no ano
+            </span>
+            <input
+              type="number"
+              value={meses}
+              onChange={e => setMeses(+e.target.value)}
+              className="w-full p-2 rounded border"
+            />
+          </label>
+
+          <label className="flex flex-col gap-1">
+            <span className="flex items-center gap-2 font-medium">
+              <BadgeInfo className="w-4 h-4" />
+              Anos trabalhados
+            </span>
+            <input
+              type="number"
+              value={anos}
+              onChange={e => setAnos(+e.target.value)}
+              className="w-full p-2 rounded border"
+            />
+          </label>
+
+          <label className="flex flex-col gap-1">
+            <span className="flex items-center gap-2 font-medium">
+              <Briefcase className="w-4 h-4" />
+              Tipo de rescisão
+            </span>
+            <select
+              value={tipoRescisao}
+              onChange={e => setTipoRescisao(e.target.value)}
+              className="w-full p-2 rounded border"
+            >
+              <option value="semJustaCausa">Demissão sem justa causa</option>
+              <option value="pedidoDemissao">Pedido de demissão</option>
+              <option value="justaCausa">Demissão por justa causa</option>
+              <option value="fimContrato">Término de contrato</option>
+            </select>
+          </label>
+
+          <label className="flex flex-col gap-1">
+            <span className="flex items-center gap-2 font-medium">
+              <Sun className="w-4 h-4" />
+              Férias vencidas?
+            </span>
+            <select
+              value={feriasVencidas ? '1' : '0'}
+              onChange={e => setFeriasVencidas(e.target.value === '1')}
+              className="w-full p-2 rounded border"
+            >
               <option value="1">Sim</option>
               <option value="0">Não</option>
             </select>
           </label>
-          <label>Total FGTS depositado (R$)
-            <input type="number" value={fgtsTotal} onChange={e => setFgtsTotal(+e.target.value)} className="w-full p-2 rounded border" />
+
+          <label className="flex flex-col gap-1">
+            <span className="flex items-center gap-2 font-medium">
+              <Download className="w-4 h-4" />
+              Total FGTS depositado (R$)
+            </span>
+            <input
+              type="number"
+              value={fgtsTotal}
+              onChange={e => setFgtsTotal(+e.target.value)}
+              className="w-full p-2 rounded border"
+            />
           </label>
         </div>
 
