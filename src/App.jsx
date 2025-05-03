@@ -76,9 +76,7 @@ function App() {
   />
 </label>
 
-jsx
-Copiar
-Editar
+
 <label className="flex flex-col gap-1">
   <span className="flex items-center gap-2 font-medium">
     <Clock className="w-4 h-4" />
@@ -92,9 +90,7 @@ Editar
   />
 </label>
 
-jsx
-Copiar
-Editar
+
 <label className="flex flex-col gap-1">
   <span className="flex items-center gap-2 font-medium">
     <CalendarDays className="w-4 h-4" />
@@ -108,9 +104,6 @@ Editar
   />
 </label>
 
-jsx
-Copiar
-Editar
 <label className="flex flex-col gap-1">
   <span className="flex items-center gap-2 font-medium">
     <BadgeInfo className="w-4 h-4" />
@@ -124,25 +117,7 @@ Editar
   />
 </label>
 
-jsx
-Copiar
-Editar
-<label className="flex flex-col gap-1">
-  <span className="flex items-center gap-2 font-medium">
-    <Briefcase className="w-4 h-4" />
-    Tipo de rescisão
-  </span>
-  <select
-    value={tipoRescisao}
-    onChange={e => setTipoRescisao(e.target.value)}
-    className="w-full p-2 rounded border"
-  >
-    <option value="semJustaCausa">Demissão sem justa causa</option>
-    <option value="pedidoDemissao">Pedido de demissão</option>
-    <option value="justaCausa">Demissão por justa causa</option>
-    <option value="fimContrato">Término de contrato</option>
-  </select>
-</label>
+
           <label>Férias vencidas?
           <label className="flex flex-col gap-1">
   <span className="flex items-center gap-2 font-medium">
