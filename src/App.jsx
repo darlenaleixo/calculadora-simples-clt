@@ -93,6 +93,7 @@ function App() {
   };
 
   return (
+    
     <div className={`${dark ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'} min-h-screen p-6`}>
       <div className="max-w-3xl mx-auto space-y-6">
         <div className="flex justify-between items-center">
@@ -101,7 +102,9 @@ function App() {
             {dark ? '☀️ Claro' : '🌙 Escuro'}
           </button>
         </div>
-
+        <div className="text-center p-10">
+      <h1 className="text-4xl font-bold text-blue-500">Tailwind funcionando 🎉</h1>
+    </div>
         <div className="grid gap-4 border rounded-lg p-4 shadow bg-white dark:bg-gray-800">
           <label className="flex flex-col gap-1">
             <span className="flex items-center gap-2 font-medium">
