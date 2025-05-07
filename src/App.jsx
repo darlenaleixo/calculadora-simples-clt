@@ -93,7 +93,6 @@ function App() {
   };
 
   return (
-    
     <div className={`${dark ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'} min-h-screen p-6`}>
       <div className="max-w-3xl mx-auto space-y-6">
         <div className="flex justify-between items-center">
@@ -102,60 +101,47 @@ function App() {
             {dark ? '☀️ Claro' : '🌙 Escuro'}
           </button>
         </div>
-        <div className="text-center p-10">
-    </div>
+
         <div className="grid gap-4 border rounded-lg p-4 shadow bg-white dark:bg-gray-800">
-          <label className="flex flex-col gap-1">
-            <span className="flex items-center gap-2 font-medium">
-              <DollarSign className="w-4 h-4" />
-              Salário (R$)
-            </span>
-            <input
-              type="number"
-              value={salario}
-              onChange={e => setSalario(+e.target.value)}
-              className="w-full p-2 rounded border"
-            />
-          </label>
-
-          <label className="flex flex-col gap-1">
-            <span className="flex items-center gap-2 font-medium">
-              <Clock className="w-4 h-4" />
-              Dias trabalhados no mês
-            </span>
-            <input
-              type="number"
-              value={dias}
-              onChange={e => setDias(+e.target.value)}
-              className="w-full p-2 rounded border"
-            />
-          </label>
-
-          <label className="flex flex-col gap-1">
-            <span className="flex items-center gap-2 font-medium">
-              <CalendarDays className="w-4 h-4" />
-              Meses trabalhados no ano
-            </span>
-            <input
-              type="number"
-              value={meses}
-              onChange={e => setMeses(+e.target.value)}
-              className="w-full p-2 rounded border"
-            />
-          </label>
-
-          <label className="flex flex-col gap-1">
-            <span className="flex items-center gap-2 font-medium">
-              <BadgeInfo className="w-4 h-4" />
-              Anos trabalhados
-            </span>
-            <input
-              type="number"
-              value={anos}
-              onChange={e => setAnos(+e.target.value)}
-              className="w-full p-2 rounded border"
-            />
-          </label>
+          {[{
+            label: 'Salário (R$)',
+            icon: DollarSign,
+            value: salario,
+            set: setSalario,
+          }, {
+            label: 'Dias trabalhados no mês',
+            icon: Clock,
+            value: dias,
+            set: setDias,
+          }, {
+            label: 'Meses trabalhados no ano',
+            icon: CalendarDays,
+            value: meses,
+            set: setMeses,
+          }, {
+            label: 'Anos trabalhados',
+            icon: BadgeInfo,
+            value: anos,
+            set: setAnos,
+          }, {
+            label: 'Total FGTS depositado (R$)',
+            icon: Download,
+            value: fgtsTotal,
+            set: setFgtsTotal,
+          }].map((field, i) => (
+            <label key={i} className="flex flex-col gap-1">
+              <span className="flex items-center gap-2 font-medium">
+                <field.icon className="w-4 h-4" />
+                {field.label}
+              </span>
+              <input
+                type="number"
+                value={field.value}
+                onChange={e => field.set(+e.target.value)}
+                className="mt-1 block w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-4 py-2 text-gray-900 dark:text-white shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 dark:focus:ring-blue-500/30 focus:outline-none transition duration-200"
+              />
+            </label>
+          ))}
 
           <label className="flex flex-col gap-1">
             <span className="flex items-center gap-2 font-medium">
@@ -165,7 +151,7 @@ function App() {
             <select
               value={tipoRescisao}
               onChange={e => setTipoRescisao(e.target.value)}
-              className="w-full p-2 rounded border"
+              className="mt-1 block w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-4 py-2 text-gray-900 dark:text-white shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 dark:focus:ring-blue-500/30 focus:outline-none transition duration-200"
             >
               <option value="semJustaCausa">Demissão sem justa causa</option>
               <option value="pedidoDemissao">Pedido de demissão</option>
@@ -182,24 +168,11 @@ function App() {
             <select
               value={feriasVencidas ? '1' : '0'}
               onChange={e => setFeriasVencidas(e.target.value === '1')}
-              className="w-full p-2 rounded border"
+              className="mt-1 block w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-4 py-2 text-gray-900 dark:text-white shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 dark:focus:ring-blue-500/30 focus:outline-none transition duration-200"
             >
               <option value="1">Sim</option>
               <option value="0">Não</option>
             </select>
-          </label>
-
-          <label className="flex flex-col gap-1">
-            <span className="flex items-center gap-2 font-medium">
-              <Download className="w-4 h-4" />
-              Total FGTS depositado (R$)
-            </span>
-            <input
-              type="number"
-              value={fgtsTotal}
-              onChange={e => setFgtsTotal(+e.target.value)}
-              className="w-full p-2 rounded border"
-            />
           </label>
         </div>
 
