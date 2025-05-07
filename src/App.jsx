@@ -103,7 +103,6 @@ function App() {
           </button>
         </div>
         <div className="text-center p-10">
-      <h1 className="text-4xl font-bold text-blue-500">Tailwind funcionando 🎉</h1>
     </div>
         <div className="grid gap-4 border rounded-lg p-4 shadow bg-white dark:bg-gray-800">
           <label className="flex flex-col gap-1">
