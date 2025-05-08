@@ -22,23 +22,15 @@ function App() {
   const [dark, setDark] = useState(false);
 
   useEffect(() => {
-    const savedSalario = localStorage.getItem('salario');
-    const savedDias = localStorage.getItem('dias');
-    const savedMeses = localStorage.getItem('meses');
-    const savedAnos = localStorage.getItem('anos');
-    const savedFeriasVencidas = localStorage.getItem('feriasVencidas');
-    const savedFgtsTotal = localStorage.getItem('fgtsTotal');
-    const savedTipoRescisao = localStorage.getItem('tipoRescisao');
-    const savedDark = localStorage.getItem('dark');
-
-    if (savedSalario) setSalario(+savedSalario);
-    if (savedDias) setDias(+savedDias);
-    if (savedMeses) setMeses(+savedMeses);
-    if (savedAnos) setAnos(+savedAnos);
-    if (savedFeriasVencidas !== null) setFeriasVencidas(savedFeriasVencidas === 'true');
-    if (savedFgtsTotal) setFgtsTotal(+savedFgtsTotal);
-    if (savedTipoRescisao) setTipoRescisao(savedTipoRescisao);
-    if (savedDark !== null) setDark(savedDark === 'true');
+    const saved = (key) => localStorage.getItem(key);
+    if (saved('salario')) setSalario(+saved('salario'));
+    if (saved('dias')) setDias(+saved('dias'));
+    if (saved('meses')) setMeses(+saved('meses'));
+    if (saved('anos')) setAnos(+saved('anos'));
+    if (saved('feriasVencidas') !== null) setFeriasVencidas(saved('feriasVencidas') === 'true');
+    if (saved('fgtsTotal')) setFgtsTotal(+saved('fgtsTotal'));
+    if (saved('tipoRescisao')) setTipoRescisao(saved('tipoRescisao'));
+    if (saved('dark') !== null) setDark(saved('dark') === 'true');
   }, []);
 
   useEffect(() => {
@@ -88,71 +80,45 @@ function App() {
     if (element) html2pdf().from(element).save('rescisao-clt.pdf');
   };
 
-  const toggleTheme = () => {
-    setDark(!dark);
-  };
+  const toggleTheme = () => setDark(!dark);
 
   return (
-    <div className={`${dark ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'} min-h-screen p-6`}>
-      <div className="max-w-3xl mx-auto space-y-6">
-        <div className="flex justify-between items-center">
+    <div className={`${dark ? 'bg-gray-900 text-white' : 'bg-gray-50 text-gray-900'} min-h-screen transition-all duration-300`}>
+      <header className="bg-gradient-to-r from-blue-600 to-blue-400 py-6 px-4 shadow text-white">
+        <div className="max-w-4xl mx-auto flex justify-between items-center">
           <h1 className="text-2xl font-bold">Calculadora Simples CLT</h1>
-          <button onClick={toggleTheme} className="px-3 py-1 rounded bg-gray-200 dark:bg-gray-700">
-            {dark ? '☀️ Claro' : '🌙 Escuro'}
+          <button onClick={toggleTheme} className="p-2 rounded bg-white text-black">
+            {dark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
           </button>
         </div>
+      </header>
 
-        <div className="grid gap-4 border rounded-lg p-4 shadow bg-white dark:bg-gray-800">
-          {[{
-            label: 'Salário (R$)',
-            icon: DollarSign,
-            value: salario,
-            set: setSalario,
-          }, {
-            label: 'Dias trabalhados no mês',
-            icon: Clock,
-            value: dias,
-            set: setDias,
-          }, {
-            label: 'Meses trabalhados no ano',
-            icon: CalendarDays,
-            value: meses,
-            set: setMeses,
-          }, {
-            label: 'Anos trabalhados',
-            icon: BadgeInfo,
-            value: anos,
-            set: setAnos,
-          }, {
-            label: 'Total FGTS depositado (R$)',
-            icon: Download,
-            value: fgtsTotal,
-            set: setFgtsTotal,
-          }].map((field, i) => (
-            <label key={i} className="flex flex-col gap-1">
+      <main className="max-w-4xl mx-auto py-8 px-4 grid gap-10">
+        <section className="grid gap-4 bg-white dark:bg-gray-800 p-6 rounded-xl shadow">
+          {[{label: 'Salário (R$)', icon: DollarSign, value: salario, set: setSalario},
+            {label: 'Dias trabalhados no mês', icon: Clock, value: dias, set: setDias},
+            {label: 'Meses trabalhados no ano', icon: CalendarDays, value: meses, set: setMeses},
+            {label: 'Anos trabalhados', icon: BadgeInfo, value: anos, set: setAnos},
+            {label: 'Total FGTS depositado (R$)', icon: Download, value: fgtsTotal, set: setFgtsTotal}
+          ].map(({label, icon: Icon, value, set}, idx) => (
+            <label key={idx} className="flex flex-col gap-1">
               <span className="flex items-center gap-2 font-medium">
-                <field.icon className="w-4 h-4" />
-                {field.label}
+                <Icon className="w-4 h-4" /> {label}
               </span>
               <input
                 type="number"
-                value={field.value}
-                onChange={e => field.set(+e.target.value)}
-                className="mt-1 block w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-4 py-2 text-gray-900 dark:text-white shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 dark:focus:ring-blue-500/30 focus:outline-none transition duration-200"
+                value={value}
+                onChange={e => set(+e.target.value)}
+                className="p-2 rounded border"
               />
             </label>
           ))}
 
           <label className="flex flex-col gap-1">
             <span className="flex items-center gap-2 font-medium">
-              <Briefcase className="w-4 h-4" />
-              Tipo de rescisão
+              <Briefcase className="w-4 h-4" /> Tipo de rescisão
             </span>
-            <select
-              value={tipoRescisao}
-              onChange={e => setTipoRescisao(e.target.value)}
-              className="mt-1 block w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-4 py-2 text-gray-900 dark:text-white shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 dark:focus:ring-blue-500/30 focus:outline-none transition duration-200"
-            >
+            <select value={tipoRescisao} onChange={e => setTipoRescisao(e.target.value)} className="p-2 rounded border">
               <option value="semJustaCausa">Demissão sem justa causa</option>
               <option value="pedidoDemissao">Pedido de demissão</option>
               <option value="justaCausa">Demissão por justa causa</option>
@@ -162,41 +128,41 @@ function App() {
 
           <label className="flex flex-col gap-1">
             <span className="flex items-center gap-2 font-medium">
-              <Sun className="w-4 h-4" />
-              Férias vencidas?
+              <Sun className="w-4 h-4" /> Férias vencidas?
             </span>
-            <select
-              value={feriasVencidas ? '1' : '0'}
-              onChange={e => setFeriasVencidas(e.target.value === '1')}
-              className="mt-1 block w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-4 py-2 text-gray-900 dark:text-white shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 dark:focus:ring-blue-500/30 focus:outline-none transition duration-200"
-            >
+            <select value={feriasVencidas ? '1' : '0'} onChange={e => setFeriasVencidas(e.target.value === '1')} className="p-2 rounded border">
               <option value="1">Sim</option>
               <option value="0">Não</option>
             </select>
           </label>
-        </div>
+        </section>
 
-        <div id="resultado" className="border rounded-lg p-4 shadow bg-white dark:bg-gray-800">
-          <h2 className="text-lg font-semibold mb-2">Resumo da Rescisão</h2>
-          <p>Saldo de salário: R$ {saldoSalario.toFixed(2)}</p>
-          <p>Aviso prévio: R$ {avisoPrevio.toFixed(2)}</p>
-          <p>Férias proporcionais: R$ {feriasProp.toFixed(2)}</p>
-          <p>1/3 férias proporcionais: R$ {umTercoFerias.toFixed(2)}</p>
-          <p>Décimo terceiro proporcional: R$ {decimoTerceiro.toFixed(2)}</p>
-          <p>Multa FGTS: R$ {multaFgts.toFixed(2)}</p>
-          <p>Férias vencidas: R$ {feriasVenc.toFixed(2)}</p>
-          <p>1/3 férias vencidas: R$ {umTercoVenc.toFixed(2)}</p>
-          <hr className="my-2" />
+        <section id="resultado" className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow">
+          <h2 className="text-xl font-semibold mb-4">Resumo da Rescisão</h2>
+          <ul className="space-y-1">
+            <li>Saldo de salário: R$ {saldoSalario.toFixed(2)}</li>
+            <li>Aviso prévio: R$ {avisoPrevio.toFixed(2)}</li>
+            <li>Férias proporcionais: R$ {feriasProp.toFixed(2)}</li>
+            <li>1/3 férias proporcionais: R$ {umTercoFerias.toFixed(2)}</li>
+            <li>Décimo terceiro proporcional: R$ {decimoTerceiro.toFixed(2)}</li>
+            <li>Multa FGTS: R$ {multaFgts.toFixed(2)}</li>
+            <li>Férias vencidas: R$ {feriasVenc.toFixed(2)}</li>
+            <li>1/3 férias vencidas: R$ {umTercoVenc.toFixed(2)}</li>
+          </ul>
+          <hr className="my-4" />
           <p className="text-xl font-bold">Total a receber: R$ {total.toFixed(2)}</p>
-        </div>
+        </section>
 
-        <button
-          onClick={exportPDF}
-          className="bg-blue-600 text-white px-4 py-2 rounded shadow hover:bg-blue-700"
-        >
-          Baixar PDF
-        </button>
-      </div>
+        <div className="text-right">
+          <button onClick={exportPDF} className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+            Baixar PDF
+          </button>
+        </div>
+      </main>
+
+      <footer className="text-center py-6 text-sm text-gray-500 dark:text-gray-400">
+        © 2025 Calculadora CLT. Todos os direitos reservados.
+      </footer>
     </div>
   );
 }
