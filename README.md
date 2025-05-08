@@ -16,5 +16,3 @@ npm run dev
 3. Selecione este repositório (após subir para GitHub)
 4. Deploy automático 🚀
 
----
-Feito com 💼 por você e ChatGPT.
