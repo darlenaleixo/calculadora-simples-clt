@@ -10,8 +10,9 @@ import {
   Sun,
   Moon
 } from 'lucide-react';
-import { motion } from 'framer-motion';
 import AdBanner from './components/AdBanner';
+import { motion } from 'framer-motion';
+
 
 function App() {
   const [salario, setSalario] = useState(3000);
