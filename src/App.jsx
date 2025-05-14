@@ -95,9 +95,9 @@ function App() {
         </div>
       </header>
 
-      <main className="max-w-4xl mx-auto py-8 px-4 grid gap-10">
+      <main className="max-w-2xl mx-auto py-8 px-4 flex flex-col gap-10">
         {/* Inputs */}
-        <motion.section initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="grid gap-4 bg-white dark:bg-gray-800 p-6 rounded-xl shadow">
+        <motion.section initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="flex flex-col gap-4 bg-white dark:bg-gray-800 p-6 rounded-xl shadow">
           {[{label: 'Salário (R$)', icon: DollarSign, value: salario, set: setSalario},
             {label: 'Dias trabalhados no mês', icon: Clock, value: dias, set: setDias},
             {label: 'Meses trabalhados no ano', icon: CalendarDays, value: meses, set: setMeses},
