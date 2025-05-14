@@ -10,6 +10,7 @@ import {
   Sun,
   Moon
 } from 'lucide-react';
+import AdBanner from './components/AdBanner';
 import { motion } from 'framer-motion';
 
 function App() {
@@ -94,8 +95,8 @@ function App() {
         </div>
       </header>
 
-      <main className="max-w-4xl mx-auto py-8 px-4 grid gap-10">
-        <motion.section initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="grid gap-4 bg-white dark:bg-gray-800 p-6 rounded-xl shadow">
+      <main className="max-w-4xl mx-auto py-8 px-4 flex flex-col gap-10">
+        <motion.section initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="flex flex-col gap-4 bg-white dark:bg-gray-800 p-6 rounded-xl shadow">
           {[{label: 'Salário (R$)', icon: DollarSign, value: salario, set: setSalario},
             {label: 'Dias trabalhados no mês', icon: Clock, value: dias, set: setDias},
             {label: 'Meses trabalhados no ano', icon: CalendarDays, value: meses, set: setMeses},
@@ -159,10 +160,12 @@ function App() {
             Baixar PDF
           </button>
         </motion.div>
+
+        <AdBanner />
       </main>
 
       <footer className="text-center py-6 text-sm text-gray-500 dark:text-gray-400">
-        © 2025 Calculadora CLT. Todos os direitos reservados.
+        © 2025 Calculadora Rescisão CLT. Todos os direitos reservados.
       </footer>
     </div>
   );
