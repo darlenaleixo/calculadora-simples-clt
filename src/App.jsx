@@ -11,6 +11,7 @@ import {
   Moon
 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import AdBanner from './components/AdBanner';
 
 function App() {
   const [salario, setSalario] = useState(3000);
@@ -95,6 +96,7 @@ function App() {
       </header>
 
       <main className="max-w-4xl mx-auto py-8 px-4 grid gap-10">
+        {/* Inputs */}
         <motion.section initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="grid gap-4 bg-white dark:bg-gray-800 p-6 rounded-xl shadow">
           {[{label: 'Salário (R$)', icon: DollarSign, value: salario, set: setSalario},
             {label: 'Dias trabalhados no mês', icon: Clock, value: dias, set: setDias},
@@ -138,6 +140,7 @@ function App() {
           </label>
         </motion.section>
 
+        {/* Resultados */}
         <motion.section initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.6 }} id="resultado" className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow">
           <h2 className="text-xl font-semibold mb-4">Resumo da Rescisão</h2>
           <ul className="space-y-1">
@@ -154,11 +157,15 @@ function App() {
           <p className="text-xl font-bold">Total a receber: R$ {total.toFixed(2)}</p>
         </motion.section>
 
+        {/* Botão PDF */}
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4, duration: 0.4 }} className="text-right">
           <button onClick={exportPDF} className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
             Baixar PDF
           </button>
         </motion.div>
+
+        {/* Bloco de Anúncio AdSense */}
+        <AdBanner />
       </main>
 
       <footer className="text-center py-6 text-sm text-gray-500 dark:text-gray-400">
