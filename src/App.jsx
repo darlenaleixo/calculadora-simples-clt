@@ -94,29 +94,60 @@ function App() {
           </button>
         </div>
       </header>
+      <main className="max-w-4xl mx-auto p-6 space-y-6">
+<section className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow space-y-4">
+  <label className="block">
+    <span className="flex items-center gap-2 font-medium mb-1">
+      <DollarSign className="w-4 h-4" />
+      Salário (R$)
+    </span>
+    <input
+      type="number"
+      value={salario}
+      onChange={e => setSalario(+e.target.value)}
+      className="w-full p-2 rounded border"
+    />
+  </label>
 
-      <main className="max-w-4xl mx-auto py-8 px-4 grid gap-10">
-        {/* Inputs */}
-        <motion.section initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="grid gap-4 bg-white dark:bg-gray-800 p-6 rounded-xl shadow">
-          {[{label: 'Salário (R$)', icon: DollarSign, value: salario, set: setSalario},
-            {label: 'Dias trabalhados no mês', icon: Clock, value: dias, set: setDias},
-            {label: 'Meses trabalhados no ano', icon: CalendarDays, value: meses, set: setMeses},
-            {label: 'Anos trabalhados', icon: BadgeInfo, value: anos, set: setAnos},
-            {label: 'Total FGTS depositado (R$)', icon: Download, value: fgtsTotal, set: setFgtsTotal}
-          ].map(({label, icon: Icon, value, set}, idx) => (
-            <label key={idx} className="flex flex-col gap-1">
-              <span className="flex items-center gap-2 font-medium">
-                <Icon className="w-4 h-4" /> {label}
-              </span>
-              <input
-                type="number"
-                value={value}
-                onChange={e => set(+e.target.value)}
-                className="p-2 rounded border"
-              />
-            </label>
-          ))}
+  <label className="block">
+    <span className="flex items-center gap-2 font-medium mb-1">
+      <Clock className="w-4 h-4" />
+      Dias trabalhados no mês
+    </span>
+    <input
+      type="number"
+      value={dias}
+      onChange={e => setDias(+e.target.value)}
+      className="w-full p-2 rounded border"
+    />
+  </label>
 
+  <label className="block">
+    <span className="flex items-center gap-2 font-medium mb-1">
+      <CalendarDays className="w-4 h-4" />
+      Meses trabalhados no ano
+    </span>
+    <input
+      type="number"
+      value={meses}
+      onChange={e => setMeses(+e.target.value)}
+      className="w-full p-2 rounded border"
+    />
+  </label>
+
+<label className="block">
+    <span className="flex items-center gap-2 font-medium mb-1">
+      <BadgeInfo className="w-4 h-4" />
+      Anos trabalhados
+    </span>
+    <input
+      type="number"
+      value={anos}
+      onChange={e => setAnos(+e.target.value)}
+      className="w-full p-2 rounded border"
+    />
+  </label>
+  
     <label className="block">
     <span className="flex items-center gap-2 font-medium mb-1">
       <Briefcase className="w-4 h-4" />
@@ -148,8 +179,6 @@ function App() {
       <option value="0">Não</option>
     </select>
   </label>
-        </motion.section>
-
         {/* Resultados */}
         <motion.section initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.6 }} id="resultado" className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow">
           <h2 className="text-xl font-semibold mb-4">Resumo da Rescisão</h2>
