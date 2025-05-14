@@ -13,7 +13,6 @@ import {
 import AdBanner from './components/AdBanner';
 import { motion } from 'framer-motion';
 
-
 function App() {
   const [salario, setSalario] = useState(3000);
   const [dias, setDias] = useState(0);
@@ -118,105 +117,27 @@ function App() {
             </label>
           ))}
 
-          <section className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow space-y-4">
-  <label className="block">
-    <span className="flex items-center gap-2 font-medium mb-1">
-      <DollarSign className="w-4 h-4" />
-      Salário (R$)
-    </span>
-    <input
-      type="number"
-      value={salario}
-      onChange={e => setSalario(+e.target.value)}
-      className="w-full p-2 rounded border"
-    />
-  </label>
+          <label className="flex flex-col gap-1">
+            <span className="flex items-center gap-2 font-medium">
+              <Briefcase className="w-4 h-4" /> Tipo de rescisão
+            </span>
+            <select value={tipoRescisao} onChange={e => setTipoRescisao(e.target.value)} className="p-2 rounded border">
+              <option value="semJustaCausa">Demissão sem justa causa</option>
+              <option value="pedidoDemissao">Pedido de demissão</option>
+              <option value="justaCausa">Demissão por justa causa</option>
+              <option value="fimContrato">Término de contrato</option>
+            </select>
+          </label>
 
-  <label className="block">
-    <span className="flex items-center gap-2 font-medium mb-1">
-      <Clock className="w-4 h-4" />
-      Dias trabalhados no mês
-    </span>
-    <input
-      type="number"
-      value={dias}
-      onChange={e => setDias(+e.target.value)}
-      className="w-full p-2 rounded border"
-    />
-  </label>
-
-  <label className="block">
-    <span className="flex items-center gap-2 font-medium mb-1">
-      <CalendarDays className="w-4 h-4" />
-      Meses trabalhados no ano
-    </span>
-    <input
-      type="number"
-      value={meses}
-      onChange={e => setMeses(+e.target.value)}
-      className="w-full p-2 rounded border"
-    />
-  </label>
-
-  <label className="block">
-    <span className="flex items-center gap-2 font-medium mb-1">
-      <BadgeInfo className="w-4 h-4" />
-      Anos trabalhados
-    </span>
-    <input
-      type="number"
-      value={anos}
-      onChange={e => setAnos(+e.target.value)}
-      className="w-full p-2 rounded border"
-    />
-  </label>
-
-  <label className="block">
-    <span className="flex items-center gap-2 font-medium mb-1">
-      <Briefcase className="w-4 h-4" />
-      Tipo de rescisão
-    </span>
-    <select
-      value={tipoRescisao}
-      onChange={e => setTipoRescisao(e.target.value)}
-      className="w-full p-2 rounded border"
-    >
-      <option value="semJustaCausa">Demissão sem justa causa</option>
-      <option value="pedidoDemissao">Pedido de demissão</option>
-      <option value="justaCausa">Demissão por justa causa</option>
-      <option value="fimContrato">Término de contrato</option>
-    </select>
-  </label>
-
-  <label className="block">
-    <span className="flex items-center gap-2 font-medium mb-1">
-      <Sun className="w-4 h-4" />
-      Férias vencidas?
-    </span>
-    <select
-      value={feriasVencidas ? '1' : '0'}
-      onChange={e => setFeriasVencidas(e.target.value === '1')}
-      className="w-full p-2 rounded border"
-    >
-      <option value="1">Sim</option>
-      <option value="0">Não</option>
-    </select>
-  </label>
-
-  <label className="block">
-    <span className="flex items-center gap-2 font-medium mb-1">
-      <Download className="w-4 h-4" />
-      Total FGTS depositado (R$)
-    </span>
-    <input
-      type="number"
-      value={fgtsTotal}
-      onChange={e => setFgtsTotal(+e.target.value)}
-      className="w-full p-2 rounded border"
-    />
-  </label>
-</section>
-
+          <label className="flex flex-col gap-1">
+            <span className="flex items-center gap-2 font-medium">
+              <Sun className="w-4 h-4" /> Férias vencidas?
+            </span>
+            <select value={feriasVencidas ? '1' : '0'} onChange={e => setFeriasVencidas(e.target.value === '1')} className="p-2 rounded border">
+              <option value="1">Sim</option>
+              <option value="0">Não</option>
+            </select>
+          </label>
         </motion.section>
 
         {/* Resultados */}
