@@ -95,9 +95,9 @@ function App() {
         </div>
       </header>
 
-      <main className="max-w-2xl mx-auto py-8 px-4 flex flex-col gap-10">
+      <main className="max-w-4xl mx-auto py-8 px-4 grid gap-10">
         {/* Inputs */}
-        <motion.section initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="flex flex-col gap-4 bg-white dark:bg-gray-800 p-6 rounded-xl shadow">
+        <motion.section initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="grid gap-4 bg-white dark:bg-gray-800 p-6 rounded-xl shadow">
           {[{label: 'Salário (R$)', icon: DollarSign, value: salario, set: setSalario},
             {label: 'Dias trabalhados no mês', icon: Clock, value: dias, set: setDias},
             {label: 'Meses trabalhados no ano', icon: CalendarDays, value: meses, set: setMeses},
@@ -117,27 +117,37 @@ function App() {
             </label>
           ))}
 
-          <label className="flex flex-col gap-1">
-            <span className="flex items-center gap-2 font-medium">
-              <Briefcase className="w-4 h-4" /> Tipo de rescisão
-            </span>
-            <select value={tipoRescisao} onChange={e => setTipoRescisao(e.target.value)} className="p-2 rounded border">
-              <option value="semJustaCausa">Demissão sem justa causa</option>
-              <option value="pedidoDemissao">Pedido de demissão</option>
-              <option value="justaCausa">Demissão por justa causa</option>
-              <option value="fimContrato">Término de contrato</option>
-            </select>
-          </label>
+    <label className="block">
+    <span className="flex items-center gap-2 font-medium mb-1">
+      <Briefcase className="w-4 h-4" />
+      Tipo de rescisão
+    </span>
+    <select
+      value={tipoRescisao}
+      onChange={e => setTipoRescisao(e.target.value)}
+      className="w-full p-2 rounded border"
+    >
+      <option value="semJustaCausa">Demissão sem justa causa</option>
+      <option value="pedidoDemissao">Pedido de demissão</option>
+      <option value="justaCausa">Demissão por justa causa</option>
+      <option value="fimContrato">Término de contrato</option>
+    </select>
+  </label>
 
-          <label className="flex flex-col gap-1">
-            <span className="flex items-center gap-2 font-medium">
-              <Sun className="w-4 h-4" /> Férias vencidas?
-            </span>
-            <select value={feriasVencidas ? '1' : '0'} onChange={e => setFeriasVencidas(e.target.value === '1')} className="p-2 rounded border">
-              <option value="1">Sim</option>
-              <option value="0">Não</option>
-            </select>
-          </label>
+         <label className="block">
+    <span className="flex items-center gap-2 font-medium mb-1">
+      <Sun className="w-4 h-4" />
+      Férias vencidas?
+    </span>
+    <select
+      value={feriasVencidas ? '1' : '0'}
+      onChange={e => setFeriasVencidas(e.target.value === '1')}
+      className="w-full p-2 rounded border"
+    >
+      <option value="1">Sim</option>
+      <option value="0">Não</option>
+    </select>
+  </label>
         </motion.section>
 
         {/* Resultados */}
