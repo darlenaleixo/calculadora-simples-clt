@@ -109,7 +109,7 @@ function App() {
       </label>
       <input
         type="number"
-        value={}
+        value={value}
         onChange={e => set(+e.target.value)}
         className="p-2 rounded border"
       />
