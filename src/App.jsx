@@ -97,54 +97,45 @@ function App() {
 
       <main className="max-w-4xl mx-auto py-8 px-4 flex flex-col gap-10">
         <motion.section initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="flex flex-col gap-4 bg-white dark:bg-gray-800 p-6 rounded-xl shadow">
-          {[{label: 'Salário (R$)', icon: DollarSign, value: salario, set: setSalario},
-            {label: 'Dias trabalhados no mês', icon: Clock, value: dias, set: setDias},
-            {label: 'Meses trabalhados no ano', icon: CalendarDays, value: meses, set: setMeses},
-            {label: 'Anos trabalhados', icon: BadgeInfo, value: anos, set: setAnos},
-            {label: 'Total FGTS depositado (R$)', icon: Download, value: fgtsTotal, set: setFgtsTotal}
-          ].map(({label, icon: Icon, value, set}, idx) => (
-            <label key={idx} className="flex flex-col gap-1">
-              <span className="flex items-center gap-2 font-medium">
-                <Icon className="w-4 h-4" /> {label}
-              </span>
-              <input
-                type="number"
-                value={value}
-                onChange={e => set(+e.target.value)}
-                className="p-2 rounded border"
-              />
-            </label>
-          ))}
+  {[{label: 'Salário (R$)', icon: DollarSign, value: salario, set: setSalario},
+    {label: 'Dias trabalhados no mês', icon: Clock, value: dias, set: setDias},
+    {label: 'Meses trabalhados no ano', icon: CalendarDays, value: meses, set: setMeses},
+    {label: 'Anos trabalhados', icon: BadgeInfo, value: anos, set: setAnos},
+    {label: 'Total FGTS depositado (R$)', icon: Download, value: fgtsTotal, set: setFgtsTotal}
+  ].map(({label, icon: Icon, value, set}, idx) => (
+    <div key={idx} className="flex flex-col gap-2">
+      <label className="font-medium flex items-center gap-2">
+        <Icon className="w-4 h-4" /> {label}
+      </label>
+      <input
+        type="number"
+        value={value}
+        onChange={e => set(+e.target.value)}
+        className="p-2 rounded border"
+      />
+    </div>
+  ))}
+          <label className="flex flex-col gap-1">
+            <span className="flex items-center gap-2 font-medium">
+              <Briefcase className="w-4 h-4" /> Tipo de rescisão
+            </span>
+            <select value={tipoRescisao} onChange={e => setTipoRescisao(e.target.value)} className="p-2 rounded border">
+              <option value="semJustaCausa">Demissão sem justa causa</option>
+              <option value="pedidoDemissao">Pedido de demissão</option>
+              <option value="justaCausa">Demissão por justa causa</option>
+              <option value="fimContrato">Término de contrato</option>
+            </select>
+          </label>
 
           <label className="flex flex-col gap-1">
-    <span className="flex items-center gap-2 font-medium">
-      <Briefcase className="w-4 h-4" /> Tipo de rescisão
-    </span>
-    <select
-      value={tipoRescisao}
-      onChange={e => setTipoRescisao(e.target.value)}
-      className="p-2 rounded border"
-    >
-      <option value="semJustaCausa">Demissão sem justa causa</option>
-      <option value="pedidoDemissao">Pedido de demissão</option>
-      <option value="justaCausa">Demissão por justa causa</option>
-      <option value="fimContrato">Término de contrato</option>
-    </select>
-  </label>
-
-  <label className="flex flex-col gap-1">
-    <span className="flex items-center gap-2 font-medium">
-      <Sun className="w-4 h-4" /> Férias vencidas?
-    </span>
-    <select
-      value={feriasVencidas ? '1' : '0'}
-      onChange={e => setFeriasVencidas(e.target.value === '1')}
-      className="p-2 rounded border"
-    >
-      <option value="1">Sim</option>
-      <option value="0">Não</option>
-    </select>
-  </label>
+            <span className="flex items-center gap-2 font-medium">
+              <Sun className="w-4 h-4" /> Férias vencidas?
+            </span>
+            <select value={feriasVencidas ? '1' : '0'} onChange={e => setFeriasVencidas(e.target.value === '1')} className="p-2 rounded border">
+              <option value="1">Sim</option>
+              <option value="0">Não</option>
+            </select>
+          </label>
         </motion.section>
 
         <motion.section initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.6 }} id="resultado" className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow">
