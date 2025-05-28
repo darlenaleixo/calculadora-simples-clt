@@ -8,6 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "calculadora-simples-clt": "file:",
     "framer-motion": "^12.10.4",
     "html2pdf.js": "^0.10.1",
     "lucide-react": "^0.287.0",
